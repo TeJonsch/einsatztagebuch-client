@@ -14,10 +14,9 @@ import { ChuckNorrisModel } from '../../model/chuck-norris.model';
 
 @Component({
     selector: 'app-overview',
-    standalone: true,
     imports: [AsyncPipe, MatTableModule, MatButtonModule, MatIconModule, MatCardModule, NgForOf, DateElementComponent],
     templateUrl: './overview.component.html',
-    styleUrl: './overview.component.css',
+    styleUrl: './overview.component.css'
 })
 export class OverviewComponent extends DestroyableComponent {
     private static readonly TIMER_INTERVAL_IN_MS = 2000;

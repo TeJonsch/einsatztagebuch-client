@@ -7,10 +7,9 @@ import { TimesheetDto } from '../../../model/timesheet.model';
 
 @Component({
     selector: 'app-date-element',
-    standalone: true,
     imports: [NgIf],
     templateUrl: './date-element.component.html',
-    styleUrl: './date-element.component.scss',
+    styleUrl: './date-element.component.scss'
 })
 export class DateElementComponent {
     @Input({ required: true }) entry!: TimeEntryDto;
