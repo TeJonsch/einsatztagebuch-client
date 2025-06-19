@@ -1,8 +1,8 @@
-//@use '@angular/material' as mat;
-//@include mat.core();
+@use "@angular/material" as mat;
+@include mat.core();
 
 /* https://material.angular.io/guide/theming */
-//@import '@angular/material/prebuilt-themes/azure-blue.css';
+@import "@angular/material/prebuilt-themes/azure-blue.css";
 //@import '@angular/material/prebuilt-themes/rose-red.css';
 //@import '@angular/material/prebuilt-themes/cyan-orange.css';
 //@import '@angular/material/prebuilt-themes/magenta-violet.css';
@@ -13,5 +13,5 @@
 
 html {
     background-color: #1c1d1f;
-    color: #dbdde1;
+    //color: #dbdde1;
 }

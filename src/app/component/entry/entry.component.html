@@ -1,8 +1,10 @@
-<table>
-    <tr>
-        <td>{{ entry.uuid }}</td>
-        <td>{{ entry.creationTimestamp }}</td>
-        <td>{{ entry.messageTimestamp }}</td>
-        <td>{{ entry.message }}</td>
-    </tr>
-</table>
+<mat-card
+    class="entry-card"
+    appearance="outlined">
+    <mat-card-header>
+        <p>{{ entry.messageTimestamp }}</p>
+    </mat-card-header>
+    <mat-card-content>
+        <p>{{ entry.message }}</p>
+    </mat-card-content>
+</mat-card>

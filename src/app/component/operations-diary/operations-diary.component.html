@@ -1,3 +1,8 @@
-@for (entry of operationsDiary.entries; track entry.uuid) {
-<app-entry [entry]="entry"></app-entry>
-}
+<div class="entry-container">
+    @for (entry of operationsDiary.entries; track entry.uuid) {
+        <app-entry
+            class="diary-entry"
+            [entry]="entry">
+        </app-entry>
+    }
+</div>
