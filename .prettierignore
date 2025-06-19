@@ -1,0 +1,8 @@
+**/.angular
+**/.vscode
+**/.idea
+**/.git
+**/.svn
+**/.hg
+**/dist
+**/node_modules

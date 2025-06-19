@@ -1,0 +1,56 @@
+.date-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding-bottom: 5px;
+}
+
+.date-cell {
+  text-align: center;
+  font-size: 0.8rem;
+  writing-mode: vertical-rl;
+  transform: scale(-1);
+  cursor: default;
+}
+
+.total-duration-of-working-time {
+  text-align: center;
+  border-radius: 15px;
+  width: 60px;
+  height: 20px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid #c6c2b0;
+  background: #464b04;
+
+  font-size: 0.8rem;
+  cursor: default;
+}
+
+.button-container {
+  margin: 10px;
+  margin-top: 20px;
+}
+
+button {
+  padding: 10px 14px;
+  background-color: #1e167f;
+  border: solid 1px #9486ff;
+  color: #9486ff;
+}
+
+button:hover {
+  color: #dbdde1;
+  border-color: #dbdde1;
+  cursor: pointer;
+}
+
+.seperator {
+  height: 2px;
+  width: 20px;
+  background-color: #c6c2b0;
+}

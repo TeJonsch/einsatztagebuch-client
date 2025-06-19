@@ -1,0 +1,32 @@
+<article>
+    <ng-container *ngFor="let dateDto of (timesheet$ | async)?.entries">
+        <div class="date-row">
+            <p class="date-cell">{{ dateDto.date }}</p>
+            <app-date-element
+                *ngFor="let entry of dateDto.entries; index as i; last as isLast"
+                [entry]="entry"
+                [nextEntry]="isLast ? null : dateDto.entries[i + 1]"
+                [isLast]="isLast"
+                [deleteObservable$]="deleteObservable$">
+            </app-date-element>
+            <div class="seperator"></div>
+            <div class="total-duration-of-working-time">
+                <p>{{ dateDto.totalDurationOfWorkingTime }}</p>
+            </div>
+        </div>
+    </ng-container>
+</article>
+
+<section>
+    <div class="button-container">
+        <button
+            (click)="deleteAllOld()"
+            type="button">
+            Delete past
+        </button>
+    </div>
+</section>
+
+<aside>
+    <p>{{ (chuckNorrisFact$ | async)?.value }}</p>
+</aside>

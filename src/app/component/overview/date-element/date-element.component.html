@@ -1,0 +1,31 @@
+<div cLass="element">
+    <div
+        (click)="deleteEntry()"
+        class="time-container container deletable">
+        <p class="big">{{ entry.start }} - {{ entry.end }}</p>
+
+        @if (entry.showWorkingHourWarning) {
+            <div class="warning-container">
+                <img
+                    class="warning-icon"
+                    alt="> 6h"
+                    src="caution-icon.svg" />
+                <p class="small">{{ entry.durationOfWorkingTime }}</p>
+            </div>
+        } @else {
+            <p class="small">{{ entry.durationOfWorkingTime }}</p>
+        }
+    </div>
+    <div
+        *ngIf="!isLast"
+        class="seperator"></div>
+    <div
+        *ngIf="!isLast"
+        (click)="deleteBreak()"
+        class="break-time-container container deletable">
+        <p class="small">{{ entry.durationOfTheBreakTime }}</p>
+    </div>
+    <div
+        *ngIf="!isLast"
+        class="seperator"></div>
+</div>
