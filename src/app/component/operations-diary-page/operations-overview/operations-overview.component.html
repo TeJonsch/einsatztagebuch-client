@@ -1,0 +1,5 @@
+<article>
+    @for (operation of (operationsDiary$ | async)?.operations; track operation.uuid) {
+        <app-operation-card [operation]="operation"></app-operation-card>
+    }
+</article>

@@ -1,0 +1,13 @@
+<mat-card
+    class="entry-card"
+    appearance="outlined">
+    <mat-card-header>
+        <p>{{ operation.operationStartTimestamp }}</p>
+        <p>{{ operation.alarmKeyword }}</p>
+        <p>{{ operation.controlCenterId }}</p>
+        <p>{{ operation.uuid }}</p>
+    </mat-card-header>
+    <mat-card-actions>
+      <button (click)="navigateToOperation(operation)">Auswählen</button>
+    </mat-card-actions>
+</mat-card>

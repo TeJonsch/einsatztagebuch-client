@@ -1,5 +1,5 @@
-import { DiaryEntryDto } from './diary-entry.model';
+import { OperationDto } from './operation.model';
 
 export interface OperationsDiaryDto {
-    entries: Array<DiaryEntryDto>;
+    operations: Array<OperationDto>;
 }

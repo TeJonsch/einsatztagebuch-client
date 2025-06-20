@@ -1,0 +1,9 @@
+@if(operation$ | async; as operation) {
+  <p>{{ operation.operationStartTimestamp }}</p>
+  <p>{{ operation.controlCenterId }}</p>
+  <p>{{ operation.alarmKeyword }}</p>
+
+  @for (diaryEntry of operation.diaryEntries; track diaryEntry.uuid) {
+    <app-diary-entry-card [diary-entry]="diaryEntry"></app-diary-entry-card>
+  }
+}
