@@ -5,6 +5,4 @@ import { DiaryEntryOverviewComponent } from './component/operation-page/diary-en
 export const routes: Routes = [
     { path: '', component: OperationsOverviewComponent },
     { path: 'operations/:id', component: DiaryEntryOverviewComponent },
-    { path: '', redirectTo: '/operations', pathMatch: 'full' },
-    // { path: '**', redirectTo: '/operations' },
 ];
