@@ -1,11 +1,11 @@
-<article class="page">
+<section class="page">
     <div class="header-container">
         <h2>Einsätze</h2>
         <div class="spacer"></div>
         <button
-            matIconButton
-            class="button"
-            aria-label="Neuen Einsatz hinzufügen">
+            mat-icon-button
+            aria-label="Neuen Einsatz hinzufügen"
+            (click)="openCreateDialog()">
             <mat-icon>add</mat-icon>
         </button>
     </div>
@@ -14,4 +14,4 @@
             <app-operation-card [operation]="operation"></app-operation-card>
         }
     </div>
-</article>
+</section>

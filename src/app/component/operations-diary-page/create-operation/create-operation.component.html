@@ -1,0 +1,40 @@
+<div class="dialog">
+    <h2>Neuen Einsatz hinzufügen</h2>
+
+    <mat-form-field class="create-operation-input">
+        <mat-label>Einsatznr. Leitstelle</mat-label>
+        <input
+            matInput
+            [formControl]="controlCenterIdFormControl" />
+    </mat-form-field>
+
+    <mat-form-field class="create-operation-input">
+        <mat-label>Alarmstichwort</mat-label>
+        <input
+            matInput
+            [formControl]="alarmKeywordFormControl" />
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-label>Einsatzbeginn</mat-label>
+        <input
+            matInput
+            type="datetime-local"
+            [value]="operationStartTimestamp" />
+    </mat-form-field>
+
+    <div class="button-row">
+        <button
+            mat-stroked-button
+            class="button"
+            (click)="cancel()">
+            Abbrechen
+        </button>
+        <button
+            mat-flat-button
+            class="button"
+            (click)="save()">
+            Hinzufügen
+        </button>
+    </div>
+</div>

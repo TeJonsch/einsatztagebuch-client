@@ -3,6 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { filter, interval, merge, Observable, switchMap } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { OperationsDiaryDto } from '../model/operations-diary.model';
+import { CreateOperationDto } from '../model/create-operation.model';
+import { OperationDto } from '../model/operation.model';
 
 @Injectable({
     providedIn: 'root',
@@ -35,5 +37,12 @@ export class OperationsDiaryService {
             switchMap((operationsDiary) => operationsDiary.operations),
             filter((operation) => operationUuid === operation.uuid),
         );
+    }
+
+    public createOperation(createOperationDto: CreateOperationDto) {
+        return this.httpClient.post<OperationDto>(`${environment.serverBaseUrl}/${OperationsDiaryService.OPERATIONS_DIARY_PATH}`, {
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(createOperationDto),
+        });
     }
 }

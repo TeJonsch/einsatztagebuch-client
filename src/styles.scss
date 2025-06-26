@@ -1,15 +1,22 @@
-@use "@angular/material" as mat;
-@include mat.core();
+@use '@angular/material' as mat;
 
-/* https://material.angular.io/guide/theming */
-@import "@angular/material/prebuilt-themes/azure-blue.css";
-//@import '@angular/material/prebuilt-themes/rose-red.css';
-//@import '@angular/material/prebuilt-themes/cyan-orange.css';
-//@import '@angular/material/prebuilt-themes/magenta-violet.css';
-//@import '@angular/material/prebuilt-themes/deeppurple-amber.css';
-//@import '@angular/material/prebuilt-themes/indigo-pink.css';
-//@import '@angular/material/prebuilt-themes/pink-bluegrey.css';
-//@import '@angular/material/prebuilt-themes/purple-green.css';
+body {
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  margin: 0;
+  padding: 30px;
+  height: 100%;
+
+  @include mat.theme((
+    color: (
+      theme-type: light,
+      primary: mat.$azure-palette,
+      tertiary: mat.$blue-palette,
+    ),
+    typography: Roboto,
+    density: 0,
+  ));
+}
 
 html {
+  height: 100%;
 }
