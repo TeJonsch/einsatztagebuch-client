@@ -1,6 +1,17 @@
-<article>
-    <h2>Einsätze</h2>
-    @for (operation of (operationsDiary$ | async)?.operations; track operation.uuid) {
-        <app-operation-card [operation]="operation"></app-operation-card>
-    }
+<article class="page">
+    <div class="header-container">
+        <h2>Einsätze</h2>
+        <div class="spacer"></div>
+        <button
+            matIconButton
+            class="button"
+            aria-label="Neuen Einsatz hinzufügen">
+            <mat-icon>add</mat-icon>
+        </button>
+    </div>
+    <div class="card-container">
+        @for (operation of (operationsDiary$ | async)?.operations; track operation.uuid) {
+            <app-operation-card [operation]="operation"></app-operation-card>
+        }
+    </div>
 </article>

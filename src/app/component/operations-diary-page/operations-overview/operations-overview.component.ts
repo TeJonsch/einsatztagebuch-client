@@ -4,10 +4,12 @@ import { AsyncPipe } from '@angular/common';
 import { OperationsDiaryDto } from '../../../model/operations-diary.model';
 import { OperationsDiaryService } from '../../../service/operations-diary.service';
 import { OperationCardComponent } from '../operation-card/operation-card.component';
+import { MatIcon, MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
     selector: 'app-operations-overview',
-    imports: [AsyncPipe, OperationCardComponent],
+    imports: [AsyncPipe, OperationCardComponent, MatIcon, MatButtonModule, MatIconModule],
     templateUrl: './operations-overview.component.html',
     styleUrl: './operations-overview.component.scss',
 })

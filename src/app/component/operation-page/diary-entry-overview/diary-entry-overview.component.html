@@ -5,6 +5,9 @@
 
     <div class="diary-entry-container">
         <h2>Einträge</h2>
+
+      <app-create-diary-entry-card></app-create-diary-entry-card>
+
         @for (diaryEntry of operation.diaryEntries; track diaryEntry.uuid) {
             <app-diary-entry-card
                 class="diary-entry"

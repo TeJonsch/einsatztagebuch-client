@@ -1,13 +1,14 @@
 <mat-card
-    class="entry-card"
-    appearance="outlined">
-    <mat-card-header>
-        <p>{{ operation.operationStartTimestamp }}</p>
-        <p>{{ operation.alarmKeyword }}</p>
-        <p>{{ operation.controlCenterId }}</p>
-        <p>{{ operation.uuid }}</p>
+    class="operation"
+    appearance="outlined"
+    (click)="navigateToOperation(operation)"
+    (keyup)="navigateToOperation(operation)">
+    <mat-card-header class="header-container">
+        <div>{{ operation.operationStartTimestamp }}</div>
+        <span class="spacer"></span>
+        <div class="control-center-id">{{ operation.controlCenterId }}</div>
     </mat-card-header>
-    <mat-card-actions>
-      <button (click)="navigateToOperation(operation)">Auswählen</button>
-    </mat-card-actions>
+    <mat-card-content>
+        <p>{{ operation.alarmKeyword }}</p>
+    </mat-card-content>
 </mat-card>

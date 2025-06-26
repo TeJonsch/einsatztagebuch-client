@@ -1,0 +1,25 @@
+.operation {
+    cursor: pointer;
+}
+
+.operation:hover {
+    border-color: darkred;
+}
+
+.header-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.spacer {
+    flex: 1 1 auto;
+}
+
+.control-center-id {
+    border: cadetblue 1px solid;
+    border-radius: var(--mdc-outlined-card-container-shape, var(--mat-app-corner-medium));
+    padding: 4px;
+    width: 4rem;
+    text-align: center;
+}

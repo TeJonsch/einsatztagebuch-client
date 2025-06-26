@@ -5,10 +5,11 @@ import { OperationsDiaryService } from '../../../service/operations-diary.servic
 import { OperationDto } from '../../../model/operation.model';
 import { AsyncPipe } from '@angular/common';
 import { DiaryEntryCardComponent } from '../diary-entry-card/diary-entry-card.component';
+import { CreateDiaryEntryCardComponent } from '../create-diary-entry-card/create-diary-entry-card.component';
 
 @Component({
     selector: 'app-diary-entry-overview',
-    imports: [AsyncPipe, DiaryEntryCardComponent],
+    imports: [AsyncPipe, DiaryEntryCardComponent, CreateDiaryEntryCardComponent],
     templateUrl: './diary-entry-overview.component.html',
     styleUrl: './diary-entry-overview.component.scss',
 })
