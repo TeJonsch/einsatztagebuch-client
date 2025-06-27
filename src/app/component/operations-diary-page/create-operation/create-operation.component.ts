@@ -21,7 +21,7 @@ export class CreateOperationComponent {
 
     constructor(
         private readonly operationsDiaryService: OperationsDiaryService,
-        private dialogRef: MatDialogRef<CreateOperationComponent>,
+        private readonly dialogRef: MatDialogRef<CreateOperationComponent>,
     ) {
         this.operationStartTimestamp = this.createDateTimeNow();
     }

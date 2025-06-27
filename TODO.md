@@ -1,0 +1,3 @@
+- Aktualisierung nach dem Hinzufügen
+- Anzeige Validatorfehler
+- Sortierung

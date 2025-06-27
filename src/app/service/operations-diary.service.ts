@@ -40,9 +40,8 @@ export class OperationsDiaryService {
     }
 
     public createOperation(createOperationDto: CreateOperationDto) {
-        return this.httpClient.post<OperationDto>(`${environment.serverBaseUrl}/${OperationsDiaryService.OPERATIONS_DIARY_PATH}`, {
+        return this.httpClient.post<OperationDto>(`${environment.serverBaseUrl}/${OperationsDiaryService.OPERATIONS_DIARY_PATH}`, createOperationDto, {
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(createOperationDto),
         });
     }
 }

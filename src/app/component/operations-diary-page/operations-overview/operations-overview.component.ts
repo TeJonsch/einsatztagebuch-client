@@ -25,7 +25,7 @@ export class OperationsOverviewComponent {
     }
 
     openCreateDialog() {
-        let dialogRef = this.dialog.open(CreateOperationComponent, {
+        this.dialog.open(CreateOperationComponent, {
             height: '400px',
             width: '600px',
         });
