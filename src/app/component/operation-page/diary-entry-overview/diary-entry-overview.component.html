@@ -1,19 +1,27 @@
-@if (operation$ | async; as operation) {
-    <p>{{ operation.operationStartTimestamp }}</p>
-    <p>{{ operation.controlCenterId }}</p>
-    <p>{{ operation.alarmKeyword }}</p>
+<main class="page">
+    @if (operation$ | async; as operation) {
+        <p>{{ operation.operationStartTimestamp }}</p>
+        <p>{{ operation.controlCenterId }}</p>
+        <p>{{ operation.alarmKeyword }}</p>
 
-    <div class="diary-entry-container">
-        <h2>Einträge</h2>
-
-      <app-create-diary-entry-card></app-create-diary-entry-card>
-
-        @for (diaryEntry of operation.diaryEntries; track diaryEntry.uuid) {
-            <app-diary-entry-card
-                class="diary-entry"
-                [diary-entry]="diaryEntry"></app-diary-entry-card>
-        }
-    </div>
-} @else {
-    <p>Keinen Einsatz gefunden</p>
-}
+        <div class="diary-entry-container">
+            <div class="header-container">
+                <h2>Einträge</h2>
+                <div class="spacer"></div>
+                <button
+                    mat-icon-button
+                    aria-label="Neuen Einsatz hinzufügen"
+                    (click)="openCreateDialog(operation)">
+                    <mat-icon>add</mat-icon>
+                </button>
+            </div>
+            @for (diaryEntry of operation.diaryEntries; track diaryEntry.uuid) {
+                <app-diary-entry-card
+                    class="diary-entry"
+                    [diary-entry]="diaryEntry"></app-diary-entry-card>
+            }
+        </div>
+    } @else {
+        <p>Keinen Einsatz gefunden</p>
+    }
+</main>

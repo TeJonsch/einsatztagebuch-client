@@ -1,1 +1,31 @@
-<p>create-diary-entry-card works!</p>
+<div class="dialog">
+  <h2>Neuen Eintrag hinzufügen</h2>
+
+  <mat-form-field class="example-full-width">
+    <mat-label>Meldung</mat-label>
+    <textarea matInput [value]="message"></textarea>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Datum und Zeit der Meldung</mat-label>
+    <input
+      matInput
+      type="datetime-local"
+      [value]="messageTimestamp" />
+  </mat-form-field>
+
+  <div class="button-row">
+    <button
+      mat-stroked-button
+      class="button"
+      (click)="cancel()">
+      Abbrechen
+    </button>
+    <button
+      mat-flat-button
+      class="button"
+      (click)="createDiaryEntry()">
+      Hinzufügen
+    </button>
+  </div>
+</div>

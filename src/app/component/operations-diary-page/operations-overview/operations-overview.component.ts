@@ -16,7 +16,7 @@ import { MatDialog } from '@angular/material/dialog';
     styleUrl: './operations-overview.component.scss',
 })
 export class OperationsOverviewComponent {
-    readonly dialog = inject(MatDialog);
+    private readonly dialog = inject(MatDialog);
 
     operationsDiary$: Observable<OperationsDiaryDto>;
 

@@ -5,13 +5,16 @@ import { environment } from '../../environments/environment';
 import { OperationsDiaryDto } from '../model/operations-diary.model';
 import { CreateOperationDto } from '../model/create-operation.model';
 import { OperationDto } from '../model/operation.model';
+import { CreateDiaryEntryDto } from '../model/create-diary-entry.model';
 
 @Injectable({
     providedIn: 'root',
 })
 export class OperationsDiaryService {
     private static readonly OPERATIONS_DIARY_PATH = 'operations-diary';
-    private static readonly TIMER_INTERVAL_IN_MS = 2000;
+    private static readonly DIARY_ENTRIES_PATH = 'diary-entries';
+
+    private static readonly TIMER_INTERVAL_IN_MS = 1000;
 
     private readonly operationsDiary$: Observable<OperationsDiaryDto>;
 
@@ -23,7 +26,7 @@ export class OperationsDiaryService {
     }
 
     public loadOperationsDiary(): Observable<OperationsDiaryDto> {
-        return this.httpClient.get<OperationsDiaryDto>(`${environment.serverBaseUrl}/${OperationsDiaryService.OPERATIONS_DIARY_PATH}`, {
+        return this.httpClient.get<OperationsDiaryDto>(this.getOperationsDiaryUrl(), {
             headers: { 'Content-Type': 'application/json' },
         });
     }
@@ -40,8 +43,22 @@ export class OperationsDiaryService {
     }
 
     public createOperation(createOperationDto: CreateOperationDto) {
-        return this.httpClient.post<OperationDto>(`${environment.serverBaseUrl}/${OperationsDiaryService.OPERATIONS_DIARY_PATH}`, createOperationDto, {
+        return this.httpClient.post<OperationDto>(this.getOperationsDiaryUrl(), createOperationDto, {
             headers: { 'Content-Type': 'application/json' },
         });
+    }
+
+    createDiaryEntry(createDiaryEntryDto: CreateDiaryEntryDto, operationDto: OperationDto) {
+        return this.httpClient.post<OperationDto>(this.getDiaryEntriesUrl(operationDto), createDiaryEntryDto, {
+            headers: { 'Content-Type': 'application/json' },
+        });
+    }
+
+    private getOperationsDiaryUrl() {
+        return `${environment.serverBaseUrl}/${OperationsDiaryService.OPERATIONS_DIARY_PATH}`;
+    }
+
+    private getDiaryEntriesUrl(operationDto: OperationDto) {
+        return `${this.getOperationsDiaryUrl()}/${operationDto.uuid}/${OperationsDiaryService.DIARY_ENTRIES_PATH}`;
     }
 }

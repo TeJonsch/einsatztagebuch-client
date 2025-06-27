@@ -1,3 +1,6 @@
 - Aktualisierung nach dem Hinzufügen
+  - Websockets?
 - Anzeige Validatorfehler
 - Sortierung
+- Speichern mit Enter
+- Plausibilitätsprüfungen

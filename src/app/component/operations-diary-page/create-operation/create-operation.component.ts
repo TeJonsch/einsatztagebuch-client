@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { MatFormField, MatLabel } from '@angular/material/form-field';
 import { FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
@@ -14,19 +14,19 @@ import { MatDialogRef } from '@angular/material/dialog';
     styleUrl: './create-operation.component.scss',
 })
 export class CreateOperationComponent {
+    private readonly operationsDiaryService = inject(OperationsDiaryService);
+    private readonly dialogRef = inject(MatDialogRef<CreateOperationComponent>);
+
     public operationStartTimestamp: string;
 
     readonly controlCenterIdFormControl = new FormControl('', [Validators.required, Validators.pattern('[0-9]*')]);
     readonly alarmKeywordFormControl = new FormControl('', []);
 
-    constructor(
-        private readonly operationsDiaryService: OperationsDiaryService,
-        private readonly dialogRef: MatDialogRef<CreateOperationComponent>,
-    ) {
+    constructor() {
         this.operationStartTimestamp = this.createDateTimeNow();
     }
 
-    save(): void {
+    createOperation(): void {
         if (this.controlCenterIdFormControl.errors) {
             console.error(this.controlCenterIdFormControl.errors);
             return;
@@ -54,6 +54,7 @@ export class CreateOperationComponent {
         this.dialogRef.close();
     }
 
+    // TODO: refactor duplicate code
     private createDateTimeNow() {
         const date = new Date();
         const year = date.getFullYear();
