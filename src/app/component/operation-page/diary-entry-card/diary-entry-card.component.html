@@ -1,10 +1,8 @@
 <mat-card
     class="entry-card"
     appearance="outlined">
-    <mat-card-header>
-        <p>{{ diaryEntry.messageTimestamp }}</p>
-    </mat-card-header>
-    <mat-card-content>
-        <p>{{ diaryEntry.message }}</p>
+    <mat-card-content class="content">
+        <span class="timestamp">{{ diaryEntry.messageTimestamp }}</span>
+        <span>{{ diaryEntry.message }}</span>
     </mat-card-content>
 </mat-card>

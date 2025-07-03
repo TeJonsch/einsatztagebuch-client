@@ -4,3 +4,5 @@
 - Sortierung
 - Speichern mit Enter
 - Plausibilitätsprüfungen
+- Sortierung Einsätze / Einträge nach Datum absteigend
+- Responsive Design

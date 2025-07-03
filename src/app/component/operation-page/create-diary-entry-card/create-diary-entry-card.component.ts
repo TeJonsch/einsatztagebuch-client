@@ -1,10 +1,9 @@
 import { Component, Inject, inject } from '@angular/core';
-import { FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButton } from '@angular/material/button';
 import { MatInput, MatLabel } from '@angular/material/input';
 import { OperationsDiaryService } from '../../../service/operations-diary.service';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { CreateOperationDto } from '../../../model/create-operation.model';
 import { MatFormField } from '@angular/material/form-field';
 import { CreateDiaryEntryDto } from '../../../model/create-diary-entry.model';
 import { OperationDto } from '../../../model/operation.model';
@@ -22,14 +21,14 @@ export class CreateDiaryEntryCardComponent {
     messageTimestamp = this.createDateTimeNow();
     message = '';
 
-    constructor(@Inject(MAT_DIALOG_DATA) public operationDto: OperationDto) {}
+    constructor(@Inject(MAT_DIALOG_DATA) public data: { operationDto: OperationDto }) {}
 
     createDiaryEntry(): void {
         const createDiaryEntryDto: CreateDiaryEntryDto = {
             message: this.message,
             messageTimestamp: this.messageTimestamp,
         };
-        this.operationsDiaryService.createDiaryEntry(createDiaryEntryDto, this.operationDto).subscribe();
+        this.operationsDiaryService.createDiaryEntry(createDiaryEntryDto, this.data.operationDto).subscribe();
 
         console.info('Diary entry created');
 

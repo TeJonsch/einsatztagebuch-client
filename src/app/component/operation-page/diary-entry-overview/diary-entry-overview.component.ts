@@ -12,7 +12,7 @@ import { MatDialog } from '@angular/material/dialog';
 
 @Component({
     selector: 'app-diary-entry-overview',
-    imports: [AsyncPipe, DiaryEntryCardComponent, CreateDiaryEntryCardComponent, MatIcon, MatIconButton],
+    imports: [AsyncPipe, DiaryEntryCardComponent, MatIcon, MatIconButton],
     templateUrl: './diary-entry-overview.component.html',
     styleUrl: './diary-entry-overview.component.scss',
 })
@@ -32,9 +32,9 @@ export class DiaryEntryOverviewComponent implements OnInit {
         );
     }
 
-    openCreateDialog(operation: OperationDto) {
+    openCreateDialog(operationDto: OperationDto) {
         this.dialog.open(CreateDiaryEntryCardComponent, {
-            data: { operation },
+            data: { operationDto: operationDto },
             height: '400px',
             width: '600px',
         });
