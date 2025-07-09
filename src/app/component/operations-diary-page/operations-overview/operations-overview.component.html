@@ -3,14 +3,14 @@
         <h2>Einsätze</h2>
         <div class="spacer"></div>
         <button
-            mat-icon-button
+            (click)="openCreateDialog()"
             aria-label="Neuen Einsatz hinzufügen"
-            (click)="openCreateDialog()">
+            mat-icon-button>
             <mat-icon>add</mat-icon>
         </button>
     </div>
     <div class="card-container">
-        @for (operation of (operationsDiary$ | async)?.operations; track operation.uuid) {
+        @for (operation of sortedOperations | async; track operation.uuid) {
             <app-operation-card [operation]="operation"></app-operation-card>
         }
     </div>

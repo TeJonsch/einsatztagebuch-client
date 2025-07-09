@@ -1,42 +1,49 @@
-import { Component, Inject, inject } from '@angular/core';
+import { Component, inject, Input } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButton } from '@angular/material/button';
 import { MatInput, MatLabel } from '@angular/material/input';
 import { OperationsDiaryService } from '../../../service/operations-diary.service';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { MatFormField } from '@angular/material/form-field';
 import { CreateDiaryEntryDto } from '../../../model/create-diary-entry.model';
 import { OperationDto } from '../../../model/operation.model';
+import { MatCard, MatCardActions, MatCardContent, MatCardHeader, MatCardTitle } from '@angular/material/card';
 
 @Component({
     selector: 'app-create-diary-entry-card',
-    imports: [FormsModule, MatButton, MatFormField, MatInput, MatLabel, ReactiveFormsModule],
+    imports: [
+        FormsModule,
+        MatButton,
+        MatFormField,
+        MatInput,
+        MatLabel,
+        ReactiveFormsModule,
+        MatCard,
+        MatCardContent,
+        MatCardHeader,
+        MatCardActions,
+        MatCardTitle,
+    ],
     templateUrl: './create-diary-entry-card.component.html',
     styleUrl: './create-diary-entry-card.component.scss',
 })
 export class CreateDiaryEntryCardComponent {
     private readonly operationsDiaryService = inject(OperationsDiaryService);
-    private readonly dialogRef = inject(MatDialogRef<CreateDiaryEntryCardComponent>);
+
+    @Input({ required: true }) operation!: OperationDto;
 
     messageTimestamp = this.createDateTimeNow();
     message = '';
-
-    constructor(@Inject(MAT_DIALOG_DATA) public data: { operationDto: OperationDto }) {}
 
     createDiaryEntry(): void {
         const createDiaryEntryDto: CreateDiaryEntryDto = {
             message: this.message,
             messageTimestamp: this.messageTimestamp,
         };
-        this.operationsDiaryService.createDiaryEntry(createDiaryEntryDto, this.data.operationDto).subscribe();
-
-        console.info('Diary entry created');
-
-        this.dialogRef.close();
+        this.operationsDiaryService.createDiaryEntry(createDiaryEntryDto, this.operation).subscribe();
     }
 
     cancel() {
-        this.dialogRef.close();
+        // TODO: delete content
     }
 
     // TODO: refactor duplicate code

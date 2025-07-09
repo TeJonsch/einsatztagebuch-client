@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { AsyncPipe } from '@angular/common';
 import { OperationsDiaryDto } from '../../../model/operations-diary.model';
 import { OperationsDiaryService } from '../../../service/operations-diary.service';
@@ -8,6 +8,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { CreateOperationComponent } from '../create-operation/create-operation.component';
 import { MatDialog } from '@angular/material/dialog';
+import { OperationDto } from '../../../model/operation.model';
 
 @Component({
     selector: 'app-operations-overview',
@@ -18,10 +19,19 @@ import { MatDialog } from '@angular/material/dialog';
 export class OperationsOverviewComponent {
     private readonly dialog = inject(MatDialog);
 
-    operationsDiary$: Observable<OperationsDiaryDto>;
+    sortedOperations: Observable<OperationDto[]>;
 
     constructor(private readonly operationsDiaryService: OperationsDiaryService) {
-        this.operationsDiary$ = this.operationsDiaryService.getOperationsDiary$();
+        this.sortedOperations = this.operationsDiaryService.getOperationsDiary$().pipe(
+            map((operationsDiaryDtos: OperationsDiaryDto) => {
+                return operationsDiaryDtos.operations;
+            }),
+            map((operations: OperationDto[]) => {
+                return operations.sort((a, b) => {
+                    return Date.parse(b.operationStartTimestamp) - Date.parse(a.operationStartTimestamp);
+                });
+            }),
+        );
     }
 
     openCreateDialog() {

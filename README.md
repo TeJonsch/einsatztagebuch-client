@@ -1,27 +1,41 @@
-# TimesheetClient
+# Einsatztagebuch / Gesprächsprotokoll
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.0.5.
+Korrektur von Einträgen / Ergänzung => neuer, verlinkter Eintrag
 
-## Development server
+- Eingerückt
+- Ergänzungen einfach darunter / Korrektur wandert prägnant an die Stelle des Originaleintrags
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## Datentypen
 
-## Code scaffolding
+### Eintrag
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+| Feld                       | Beschreibung                                                                                  | unveränderlich | Beschränkung Angabe                        |
+|----------------------------|-----------------------------------------------------------------------------------------------|----------------|--------------------------------------------|
+| Meldung                    | Inhaltliche Angabe der Meldung                                                                | Ja             | Keine                                      |
+| Datum und Zeit der Meldung | Für welches Datum/Zeit gilt die Nachricht                                                     | Ja             | - Aktuelles Datum/Zeit<br/>- Vergangenheit |
+| Meldender                  | Von wem stammte die Meldung (EL, LtS...)                                                      | Ja             | Keine                                      |
+| Meldungstyp                | Zu welchem Zweck wurde die Meldung gemacht?                                                   | Ja             | Siehe Meldungstyp                          |
+| Empfänger                  | An wen soll die Meldung weitergeleitet werden (Nur erforderlich bei Meldungstyp "Weitergabe") | Ja             | Keine                                      |
 
-## Build
+### Meldungstyp
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+Mögliche Werte für "Meldungstyp" sind:
 
-## Running unit tests
+| Meldungstyp   | Beschreibung                                                 |
+|---------------|--------------------------------------------------------------|
+| Dokumentation | Meldung wurde zur Dokumentation im ETB gemacht               |
+| Aufgabe       | Aufgabe zur Eledigung für den ELW (Recherche,...)            |
+| Weitergabe    | Meldung soll an Person/Stelle weitergegeben werden (EL, LtS) |
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Die Erledigung der Typen "Aufgabe" und "Weitergabe" ist zu dokumentieren.
 
-## Running end-to-end tests
+### Ver#nderliche Metadaten / Flags
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+Metadaten zu Einträgen (Wichtig, Nachforderung...) - kann nachträglich hinzugefügt werden / nicht revisionssicher
 
-## Further help
+- Flag für Priorität
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+## Technische Anmerkungen
+
+- Icons müssen offline verfügbar sein
+- ...Dto-Endung weglassen

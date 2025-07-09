@@ -1,31 +1,36 @@
-<div class="dialog">
-  <h2>Neuen Eintrag hinzufügen</h2>
+<mat-card>
+    <mat-card-header>
+        <mat-card-title>Neuen Eintrag hinzufügen</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        <mat-form-field>
+            <mat-label>Meldung</mat-label>
+            <textarea
+                matInput
+                [(ngModel)]="message"></textarea>
+        </mat-form-field>
 
-  <mat-form-field class="example-full-width">
-    <mat-label>Meldung</mat-label>
-    <textarea matInput [(ngModel)]="message"></textarea>
-  </mat-form-field>
+        <mat-form-field>
+            <mat-label>Datum und Zeit der Meldung</mat-label>
+            <input
+                matInput
+                type="datetime-local"
+                [value]="messageTimestamp" />
+        </mat-form-field>
 
-  <mat-form-field>
-    <mat-label>Datum und Zeit der Meldung</mat-label>
-    <input
-      matInput
-      type="datetime-local"
-      [value]="messageTimestamp" />
-  </mat-form-field>
-
-  <div class="button-row">
-    <button
-      mat-stroked-button
-      class="button"
-      (click)="cancel()">
-      Abbrechen
-    </button>
-    <button
-      mat-flat-button
-      class="button"
-      (click)="createDiaryEntry()">
-      Hinzufügen
-    </button>
-  </div>
-</div>
+        <mat-card-actions class="button-row">
+            <button
+                mat-stroked-button
+                class="button"
+                (click)="cancel()">
+                Abbrechen
+            </button>
+            <button
+                mat-flat-button
+                class="button"
+                (click)="createDiaryEntry()">
+                Hinzufügen
+            </button>
+        </mat-card-actions>
+    </mat-card-content>
+</mat-card>
