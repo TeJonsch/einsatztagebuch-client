@@ -8,7 +8,7 @@ import { OperationDto } from '../../../model/operation.model';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { map, Observable, startWith } from 'rxjs';
 import { AsyncPipe } from '@angular/common';
-import { MatCard, MatCardActions, MatCardContent } from '@angular/material/card';
+import { MatCard, MatCardContent } from '@angular/material/card';
 import { MatButton } from '@angular/material/button';
 import { MatSelect } from '@angular/material/select';
 
@@ -23,7 +23,6 @@ import { MatSelect } from '@angular/material/select';
         ReactiveFormsModule,
         MatCard,
         MatCardContent,
-        MatCardActions,
         FormsModule,
         MatFormFieldModule,
         MatInputModule,
@@ -40,17 +39,27 @@ export class CreateDiaryEntryCardComponent implements OnInit {
 
     @Input({ required: true }) operation!: OperationDto;
 
-    myControl = new FormControl('');
-    reporterOptions = ['Leitstelle', 'Einsatzleiter'];
-
     messageTimestamp = this.createDateTimeNow();
     message = '';
-    filteredOptions: Observable<string[]>;
+
+    reporterOptions = ['Leitstelle', 'Einsatzleiter'];
+    receiverOptions = ['Leitstelle', 'Einsatzleiter'];
+
+    reporterControl = new FormControl('');
+    receiverControl = new FormControl('');
+
+    filteredReporterOptions: Observable<string[]>;
+    filteredReceiverOptions: Observable<string[]>;
 
     ngOnInit() {
-        this.filteredOptions = this.myControl.valueChanges.pipe(
+        this.filteredReporterOptions = this.reporterControl.valueChanges.pipe(
             startWith(''),
-            map((value) => this._filter(value || '')),
+            map((value) => this._filterReporter(value || '')),
+        );
+
+        this.filteredReceiverOptions = this.receiverControl.valueChanges.pipe(
+            startWith(''),
+            map((value) => this._filterReceiver(value || '')),
         );
     }
 
@@ -66,10 +75,14 @@ export class CreateDiaryEntryCardComponent implements OnInit {
         // TODO: delete content
     }
 
-    private _filter(value: string): string[] {
+    private _filterReporter(value: string): string[] {
         const filterValue = value.toLowerCase();
-
         return this.reporterOptions.filter((option) => option.toLowerCase().includes(filterValue));
+    }
+
+    private _filterReceiver(value: string): string[] {
+        const filterValue = value.toLowerCase();
+        return this.receiverOptions.filter((option) => option.toLowerCase().includes(filterValue));
     }
 
     // TODO: refactor duplicate code

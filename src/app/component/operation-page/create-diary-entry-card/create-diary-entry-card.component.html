@@ -17,10 +17,10 @@
                     <input
                         matInput
                         type="text"
-                        [formControl]="myControl"
-                        [matAutocomplete]="auto" />
-                    <mat-autocomplete #auto="matAutocomplete">
-                        @for (option of filteredOptions | async; track option) {
+                        [formControl]="reporterControl"
+                        [matAutocomplete]="autocomplete_reporter" />
+                    <mat-autocomplete #autocomplete_reporter="matAutocomplete">
+                        @for (option of filteredReporterOptions | async; track option) {
                             <mat-option [value]="option">{{ option }}</mat-option>
                         }
                     </mat-autocomplete>
@@ -49,7 +49,14 @@
                     <mat-label>Empfänger</mat-label>
                     <input
                         matInput
-                        type="text" />
+                        type="text"
+                        [formControl]="receiverControl"
+                        [matAutocomplete]="autocomplete_receiver" />
+                    <mat-autocomplete #autocomplete_receiver="matAutocomplete">
+                        @for (option of filteredReceiverOptions | async; track option) {
+                            <mat-option [value]="option">{{ option }}</mat-option>
+                        }
+                    </mat-autocomplete>
                 </mat-form-field>
             </div>
 
