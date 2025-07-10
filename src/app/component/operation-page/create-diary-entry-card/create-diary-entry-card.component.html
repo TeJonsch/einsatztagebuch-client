@@ -1,36 +1,81 @@
 <mat-card>
-    <mat-card-header>
-        <mat-card-title>Neuen Eintrag hinzufügen</mat-card-title>
-    </mat-card-header>
     <mat-card-content>
-        <mat-form-field>
-            <mat-label>Meldung</mat-label>
-            <textarea
-                matInput
-                [(ngModel)]="message"></textarea>
-        </mat-form-field>
+        <form class="container px-0 text-center">
+            <div class="row">
+                <mat-form-field>
+                    <mat-label>Meldung</mat-label>
+                    <textarea
+                        matInput
+                        name="message"
+                        [(ngModel)]="message"></textarea>
+                </mat-form-field>
+            </div>
 
-        <mat-form-field>
-            <mat-label>Datum und Zeit der Meldung</mat-label>
-            <input
-                matInput
-                type="datetime-local"
-                [value]="messageTimestamp" />
-        </mat-form-field>
+            <div class="row">
+                <mat-form-field class="col">
+                    <mat-label>Meldender</mat-label>
+                    <input
+                        matInput
+                        type="text"
+                        [formControl]="myControl"
+                        [matAutocomplete]="auto" />
+                    <mat-autocomplete #auto="matAutocomplete">
+                        @for (option of filteredOptions | async; track option) {
+                            <mat-option [value]="option">{{ option }}</mat-option>
+                        }
+                    </mat-autocomplete>
+                </mat-form-field>
 
-        <mat-card-actions class="button-row">
-            <button
-                mat-stroked-button
-                class="button"
-                (click)="cancel()">
-                Abbrechen
-            </button>
-            <button
-                mat-flat-button
-                class="button"
-                (click)="createDiaryEntry()">
-                Hinzufügen
-            </button>
-        </mat-card-actions>
+                <mat-form-field class="col">
+                    <mat-label>Meldungstyp</mat-label>
+                    <mat-select>
+                        <mat-option value="documentation">Dokumentation</mat-option>
+                        <mat-option value="task">Aufgabe</mat-option>
+                        <mat-option value="forwarding">Weiterleitung</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+
+            <div class="row">
+                <mat-form-field class="col">
+                    <mat-label>Datum und Zeit der Meldung</mat-label>
+                    <input
+                        matInput
+                        type="datetime-local"
+                        [value]="messageTimestamp" />
+                </mat-form-field>
+
+                <mat-form-field class="col">
+                    <mat-label>Empfänger</mat-label>
+                    <input
+                        matInput
+                        type="text" />
+                </mat-form-field>
+            </div>
+
+            <div class="row">
+                <mat-form-field class="col">
+                    <mat-label>Verfasser</mat-label>
+                    <input matInput />
+                </mat-form-field>
+
+                <div class="col">
+                    <div class="d-flex flex-row justify-content-between">
+                        <button
+                            mat-stroked-button
+                            class="button"
+                            (click)="cancel()">
+                            Abbrechen
+                        </button>
+                        <button
+                            mat-flat-button
+                            class="button"
+                            (click)="createDiaryEntry()">
+                            Hinzufügen
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </form>
     </mat-card-content>
 </mat-card>

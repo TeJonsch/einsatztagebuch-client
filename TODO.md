@@ -16,6 +16,9 @@ Von wem / an wen?
 
 - [ ] PDF Export
 - [ ] Responsive Design
+- [ ] Error Handling
+- [ ] Tests
+- [ ] Wenn Meldungstyp "Weiterleitung" dann Empfänger abhängig vom Meldenden vorauswählen
 
 ## M2 - Zentrale Instanz
 

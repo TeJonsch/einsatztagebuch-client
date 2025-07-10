@@ -6,14 +6,12 @@ import { OperationDto } from '../../../model/operation.model';
 import { AsyncPipe } from '@angular/common';
 import { DiaryEntryCardComponent } from '../diary-entry-card/diary-entry-card.component';
 import { CreateDiaryEntryCardComponent } from '../create-diary-entry-card/create-diary-entry-card.component';
-import { MatIconButton } from '@angular/material/button';
-import { MatIcon } from '@angular/material/icon';
 import { MatDialog } from '@angular/material/dialog';
 import { DiaryEntryDto } from '../../../model/diary-entry.model';
 
 @Component({
     selector: 'app-diary-entry-overview',
-    imports: [AsyncPipe, DiaryEntryCardComponent, MatIcon, MatIconButton, CreateDiaryEntryCardComponent],
+    imports: [AsyncPipe, DiaryEntryCardComponent, CreateDiaryEntryCardComponent],
     templateUrl: './diary-entry-overview.component.html',
     styleUrl: './diary-entry-overview.component.scss',
 })

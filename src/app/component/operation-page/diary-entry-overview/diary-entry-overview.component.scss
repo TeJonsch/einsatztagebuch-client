@@ -1,18 +1,32 @@
 .header-container {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
 }
 
 .spacer {
-  flex: 1 1 auto;
+    flex: 1 1 auto;
 }
 
 .diary-entry-container {
-  display: flex;
-  flex-direction: column;
+    display: flex;
+    flex-direction: column;
 }
 
 .diary-entry {
     padding-bottom: 10px;
+}
+
+.operation-data {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+
+    color: gray;
+    font-size: 0.9rem;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
 }

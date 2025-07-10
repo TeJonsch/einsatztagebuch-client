@@ -9,13 +9,13 @@ Korrektur von Einträgen / Ergänzung => neuer, verlinkter Eintrag
 
 ### Eintrag
 
-| Feld                       | Beschreibung                                                                                  | unveränderlich | Beschränkung Angabe                        |
-|----------------------------|-----------------------------------------------------------------------------------------------|----------------|--------------------------------------------|
-| Meldung                    | Inhaltliche Angabe der Meldung                                                                | Ja             | Keine                                      |
-| Datum und Zeit der Meldung | Für welches Datum/Zeit gilt die Nachricht                                                     | Ja             | - Aktuelles Datum/Zeit<br/>- Vergangenheit |
-| Meldender                  | Von wem stammte die Meldung (EL, LtS...)                                                      | Ja             | Keine                                      |
-| Meldungstyp                | Zu welchem Zweck wurde die Meldung gemacht?                                                   | Ja             | Siehe Meldungstyp                          |
-| Empfänger                  | An wen soll die Meldung weitergeleitet werden (Nur erforderlich bei Meldungstyp "Weitergabe") | Ja             | Keine                                      |
+| Feld                       | Beschreibung                                                                                     | unveränderlich | Beschränkung Angabe                        |
+|----------------------------|--------------------------------------------------------------------------------------------------|----------------|--------------------------------------------|
+| Meldung                    | Inhaltliche Angabe der Meldung                                                                   | Ja             | Keine                                      |
+| Datum und Zeit der Meldung | Für welches Datum/Zeit gilt die Nachricht                                                        | Ja             | - Aktuelles Datum/Zeit<br/>- Vergangenheit |
+| Meldender                  | Von wem stammte die Meldung (EL, LtS...)                                                         | Ja             | Keine                                      |
+| Meldungstyp                | Zu welchem Zweck wurde die Meldung gemacht?                                                      | Ja             | Siehe Meldungstyp                          |
+| Empfänger                  | An wen soll die Meldung weitergeleitet werden (Nur erforderlich bei Meldungstyp "Weiterleitung") | Ja             | Keine                                      |
 
 ### Meldungstyp
 
@@ -25,9 +25,9 @@ Mögliche Werte für "Meldungstyp" sind:
 |---------------|--------------------------------------------------------------|
 | Dokumentation | Meldung wurde zur Dokumentation im ETB gemacht               |
 | Aufgabe       | Aufgabe zur Eledigung für den ELW (Recherche,...)            |
-| Weitergabe    | Meldung soll an Person/Stelle weitergegeben werden (EL, LtS) |
+| Weiterleitung | Meldung soll an Person/Stelle weitergegeben werden (EL, LtS) |
 
-Die Erledigung der Typen "Aufgabe" und "Weitergabe" ist zu dokumentieren.
+Die Erledigung der Typen "Aufgabe" und "Weiterleitung" ist zu dokumentieren.
 
 ### Ver#nderliche Metadaten / Flags
 

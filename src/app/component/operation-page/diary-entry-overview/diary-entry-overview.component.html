@@ -1,32 +1,23 @@
 <main class="page">
+    <h1>Einsatztagebuch</h1>
     @if (operation$ | async; as operation) {
-        <p>{{ operation.operationStartTimestamp }}</p>
-        <p>{{ operation.controlCenterId }}</p>
-        <p>{{ operation.alarmKeyword }}</p>
+        <div class="content">
+            <h2>Einsatz [{{ operation.controlCenterId }}]</h2>
+            <span>{{ operation.operationStartTimestamp }} - {{ operation.alarmKeyword }}</span>
 
-        <div class="diary-entry-container">
-            <div class="header-container">
-                <h2>Einträge</h2>
-                <div class="spacer"></div>
-                <button
-                    mat-icon-button
-                    aria-label="Neuen Einsatz hinzufügen"
-                    (click)="openCreateDialog(operation)">
-                    <mat-icon>add</mat-icon>
-                </button>
-            </div>
+            <div class="diary-entry-container">
+                <app-create-diary-entry-card
+                    class="my-4"
+                    [operation]="operation"></app-create-diary-entry-card>
 
-            <app-create-diary-entry-card [operation]="operation"></app-create-diary-entry-card>
-
-            <div class="spacer"></div>
-
-            @if (sortedDiaryEntries$ | async; as sortedDiaryEntries) {
-                @for (diaryEntry of sortedDiaryEntries; track diaryEntry.uuid) {
-                    <app-diary-entry-card
-                        class="diary-entry"
-                        [diary-entry]="diaryEntry"></app-diary-entry-card>
+                @if (sortedDiaryEntries$ | async; as sortedDiaryEntries) {
+                    @for (diaryEntry of sortedDiaryEntries; track diaryEntry.uuid) {
+                        <app-diary-entry-card
+                            class="diary-entry"
+                            [diary-entry]="diaryEntry"></app-diary-entry-card>
+                    }
                 }
-            }
+            </div>
         </div>
     } @else {
         <p>Keinen Einsatz gefunden</p>
