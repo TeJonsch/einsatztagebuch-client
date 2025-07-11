@@ -2,13 +2,17 @@
     max-width: 800px;
 }
 
-.content {
-    display: flex;
-    flex-direction: row;
+.task {
+    color: coral;
+}
+
+.author {
+    text-align: right;
+    color: gray;
+    font-size: 0.9rem;
 }
 
 .timestamp {
-    padding-right: 1rem;
     color: gray;
     font-size: 0.9rem;
 }

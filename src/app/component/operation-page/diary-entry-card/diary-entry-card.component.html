@@ -1,8 +1,22 @@
 <mat-card
     class="entry-card"
     appearance="outlined">
-    <mat-card-content class="content">
-        <span class="timestamp">{{ diaryEntry.messageTimestamp }}</span>
-        <span>{{ diaryEntry.message }}</span>
+    <mat-card-content>
+        <div cLass="row">
+            <span class="col timestamp">{{ diaryEntry.messageTimestamp }}</span>
+            <span class="col task">{{ diaryEntry.messageType }}</span>
+            <span class="col author">{{ diaryEntry.author }}</span>
+        </div>
+        <div class="row">
+            <div class="col-4">
+                <div>Von:&nbsp;{{ diaryEntry.reporter }}</div>
+                @if (diaryEntry.receiver) {
+                    <div>An:&nbsp;&nbsp;&nbsp;{{ diaryEntry.receiver }}</div>
+                }
+            </div>
+            <div class="col-8">
+                <span [innerHTML]="message"></span>
+            </div>
+        </div>
     </mat-card-content>
 </mat-card>

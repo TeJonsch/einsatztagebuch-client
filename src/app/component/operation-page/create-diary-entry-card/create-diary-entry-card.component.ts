@@ -39,14 +39,15 @@ export class CreateDiaryEntryCardComponent implements OnInit {
 
     @Input({ required: true }) operation!: OperationDto;
 
-    messageTimestamp = this.createDateTimeNow();
-    message = '';
-
     reporterOptions = ['Leitstelle', 'Einsatzleiter'];
     receiverOptions = ['Leitstelle', 'Einsatzleiter'];
 
+    messageControl = new FormControl('');
+    messageTypeControl = new FormControl('');
     reporterControl = new FormControl('');
     receiverControl = new FormControl('');
+    messageTimestampControl = new FormControl(this.createDateTimeNow());
+    authorControl = new FormControl('');
 
     filteredReporterOptions: Observable<string[]>;
     filteredReceiverOptions: Observable<string[]>;
@@ -65,10 +66,21 @@ export class CreateDiaryEntryCardComponent implements OnInit {
 
     createDiaryEntry(): void {
         const createDiaryEntryDto: CreateDiaryEntryDto = {
-            message: this.message,
-            messageTimestamp: this.messageTimestamp,
+            message: this.messageControl.value,
+            messageType: this.messageTypeControl.value,
+            reporter: this.reporterControl.value,
+            receiver: this.receiverControl.value,
+            messageTimestamp: this.messageTimestampControl.value,
+            author: this.authorControl.value,
         };
         this.operationsDiaryService.createDiaryEntry(createDiaryEntryDto, this.operation).subscribe();
+
+        this.messageControl.setValue('');
+        this.messageTypeControl.setValue('');
+        this.reporterControl.setValue('');
+        this.receiverControl.setValue('');
+        this.messageTimestampControl.setValue(this.createDateTimeNow());
+        // keep author
     }
 
     cancel() {

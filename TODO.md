@@ -8,6 +8,7 @@
 - [ ] Fix Einsatzbeginn / Datum und Zeit der Meldung
 - [ ] Verschlüsselung
 - [ ] Kein Dialog
+- [ ] Button, um Zeit bei Meldung zu aktualisieren
 - [x] Sortierung Einsätze / Einträge nach Datum absteigend
 
 Von wem / an wen?

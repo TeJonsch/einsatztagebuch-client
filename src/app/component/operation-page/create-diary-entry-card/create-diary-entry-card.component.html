@@ -7,7 +7,7 @@
                     <textarea
                         matInput
                         name="message"
-                        [(ngModel)]="message"></textarea>
+                        [formControl]="messageControl"></textarea>
                 </mat-form-field>
             </div>
 
@@ -28,10 +28,10 @@
 
                 <mat-form-field class="col">
                     <mat-label>Meldungstyp</mat-label>
-                    <mat-select>
-                        <mat-option value="documentation">Dokumentation</mat-option>
-                        <mat-option value="task">Aufgabe</mat-option>
-                        <mat-option value="forwarding">Weiterleitung</mat-option>
+                    <mat-select [formControl]="messageTypeControl">
+                        <mat-option value="DOCUMENTATION">Dokumentation</mat-option>
+                        <mat-option value="TASK">Aufgabe</mat-option>
+                        <mat-option value="FORWARDING">Weiterleitung</mat-option>
                     </mat-select>
                 </mat-form-field>
             </div>
@@ -42,7 +42,7 @@
                     <input
                         matInput
                         type="datetime-local"
-                        [value]="messageTimestamp" />
+                        [formControl]="messageTimestampControl" />
                 </mat-form-field>
 
                 <mat-form-field class="col">
@@ -63,7 +63,9 @@
             <div class="row">
                 <mat-form-field class="col">
                     <mat-label>Verfasser</mat-label>
-                    <input matInput />
+                    <input
+                        matInput
+                        [formControl]="authorControl" />
                 </mat-form-field>
 
                 <div class="col">

@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { MatCard, MatCardContent } from '@angular/material/card';
 import { DiaryEntryDto } from '../../../model/diary-entry.model';
 
@@ -8,6 +8,16 @@ import { DiaryEntryDto } from '../../../model/diary-entry.model';
     templateUrl: './diary-entry-card.component.html',
     styleUrl: './diary-entry-card.component.scss',
 })
-export class DiaryEntryCardComponent {
+export class DiaryEntryCardComponent implements OnInit {
     @Input('diary-entry') diaryEntry!: DiaryEntryDto;
+
+    message: string;
+
+    ngOnInit(): void {
+        this.message = this.getMessageWithTransformedLineBreaks();
+    }
+
+    private getMessageWithTransformedLineBreaks() {
+        return this.diaryEntry.message.replace(/\n/g, '<br>');
+    }
 }
