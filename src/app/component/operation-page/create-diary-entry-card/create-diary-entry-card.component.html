@@ -3,7 +3,7 @@
         <form
             [formGroup]="formGroup"
             #formDirective="ngForm"
-            (ngSubmit)="createDiaryEntry(messageTextarea, formDirective)"
+            (ngSubmit)="createDiaryEntry(formDirective)"
             class="container px-0 text-center">
             <div class="row">
                 <mat-form-field>

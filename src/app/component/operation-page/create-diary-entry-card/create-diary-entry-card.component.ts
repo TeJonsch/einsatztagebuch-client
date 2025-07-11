@@ -1,4 +1,4 @@
-import { Component, inject, Input, OnInit } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, inject, Input, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, FormGroupDirective, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatInput, MatInputModule } from '@angular/material/input';
 import { OperationsDiaryService } from '../../../service/operations-diary.service';
@@ -35,11 +35,14 @@ import { MessageType } from '../../../model/message-type.model';
     templateUrl: './create-diary-entry-card.component.html',
     styleUrl: './create-diary-entry-card.component.scss',
 })
-export class CreateDiaryEntryCardComponent implements OnInit {
+export class CreateDiaryEntryCardComponent implements OnInit, AfterViewInit {
     private readonly operationsDiaryService = inject(OperationsDiaryService);
 
     @Input({ required: true })
     operation!: OperationDto;
+
+    @ViewChild('messageTextarea')
+    private readonly messageTextarea!: ElementRef<HTMLTextAreaElement>;
 
     displayReceiverInput = true;
 
@@ -81,7 +84,11 @@ export class CreateDiaryEntryCardComponent implements OnInit {
         );
     }
 
-    createDiaryEntry(elementToBeFocussed: HTMLTextAreaElement, formGroupDirective: FormGroupDirective): void {
+    ngAfterViewInit(): void {
+        this.focusMessageTextarea();
+    }
+
+    createDiaryEntry(formGroupDirective: FormGroupDirective): void {
         if (this.areAllFieldsValid()) {
             const createDiaryEntryDto: CreateDiaryEntryDto = {
                 message: this.messageControl.value,
@@ -98,10 +105,7 @@ export class CreateDiaryEntryCardComponent implements OnInit {
 
             this.messageTimestampControl.setValue(this.createDateTimeNow());
             this.authorControl.setValue(createDiaryEntryDto.author);
-
-            setTimeout(() => {
-                elementToBeFocussed.focus();
-            }, 0);
+            this.focusMessageTextarea();
         } else {
             console.debug('Validator error(s) prevent the diary entry creation');
         }
@@ -122,6 +126,7 @@ export class CreateDiaryEntryCardComponent implements OnInit {
     }
 
     // TODO: refactor duplicate code
+
     private createDateTimeNow() {
         const date = new Date();
         const year = date.getFullYear();
@@ -150,4 +155,10 @@ export class CreateDiaryEntryCardComponent implements OnInit {
     }
 
     protected readonly MessageType = MessageType;
+
+    private focusMessageTextarea() {
+        setTimeout(() => {
+            this.messageTextarea.nativeElement.focus();
+        }, 0);
+    }
 }
