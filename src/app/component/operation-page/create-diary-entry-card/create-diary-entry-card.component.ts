@@ -1,5 +1,5 @@
 import { Component, inject, Input, OnInit } from '@angular/core';
-import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, FormGroupDirective, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatInput, MatInputModule } from '@angular/material/input';
 import { OperationsDiaryService } from '../../../service/operations-diary.service';
 import { MatFormField, MatFormFieldModule, MatLabel } from '@angular/material/form-field';
@@ -10,7 +10,8 @@ import { map, Observable, startWith } from 'rxjs';
 import { AsyncPipe } from '@angular/common';
 import { MatCard, MatCardContent } from '@angular/material/card';
 import { MatButton } from '@angular/material/button';
-import { MatSelect } from '@angular/material/select';
+import { MatSelect, MatSelectChange } from '@angular/material/select';
+import { MessageType } from '../../../model/message-type.model';
 
 @Component({
     selector: 'app-create-diary-entry-card',
@@ -37,50 +38,73 @@ import { MatSelect } from '@angular/material/select';
 export class CreateDiaryEntryCardComponent implements OnInit {
     private readonly operationsDiaryService = inject(OperationsDiaryService);
 
-    @Input({ required: true }) operation!: OperationDto;
+    @Input({ required: true })
+    operation!: OperationDto;
+
+    displayReceiverInput = true;
 
     reporterOptions = ['Leitstelle', 'Einsatzleiter'];
     receiverOptions = ['Leitstelle', 'Einsatzleiter'];
 
-    messageControl = new FormControl('');
-    messageTypeControl = new FormControl('');
-    reporterControl = new FormControl('');
-    receiverControl = new FormControl('');
-    messageTimestampControl = new FormControl(this.createDateTimeNow());
-    authorControl = new FormControl('');
+    messageControl = new FormControl('', [Validators.required]);
+    messageTypeControl = new FormControl(MessageType.FORWARDING, [Validators.required]);
+    reporterControl = new FormControl('', [Validators.required]);
+    receiverControl = new FormControl('', [Validators.required]);
+    messageTimestampControl = new FormControl(this.createDateTimeNow(), [Validators.required]);
+    authorControl = new FormControl('', [Validators.required]);
 
     filteredReporterOptions: Observable<string[]>;
     filteredReceiverOptions: Observable<string[]>;
 
+    formGroup: FormGroup;
+
+    constructor(private readonly formBuilder: FormBuilder) {}
+
     ngOnInit() {
+        this.formGroup = this.formBuilder.group({
+            message: this.messageControl,
+            messageType: this.messageTypeControl,
+            reporter: this.reporterControl,
+            receiver: this.receiverControl,
+            messageTimestamp: this.messageTimestampControl,
+            author: this.authorControl,
+        });
+
         this.filteredReporterOptions = this.reporterControl.valueChanges.pipe(
             startWith(''),
-            map((value) => this._filterReporter(value || '')),
+            map((value) => this._filterReporter(value ?? '')),
         );
 
         this.filteredReceiverOptions = this.receiverControl.valueChanges.pipe(
             startWith(''),
-            map((value) => this._filterReceiver(value || '')),
+            map((value) => this._filterReceiver(value ?? '')),
         );
     }
 
-    createDiaryEntry(): void {
-        const createDiaryEntryDto: CreateDiaryEntryDto = {
-            message: this.messageControl.value,
-            messageType: this.messageTypeControl.value,
-            reporter: this.reporterControl.value,
-            receiver: this.receiverControl.value,
-            messageTimestamp: this.messageTimestampControl.value,
-            author: this.authorControl.value,
-        };
-        this.operationsDiaryService.createDiaryEntry(createDiaryEntryDto, this.operation).subscribe();
+    createDiaryEntry(elementToBeFocussed: HTMLTextAreaElement, formGroupDirective: FormGroupDirective): void {
+        if (this.areAllFieldsValid()) {
+            const createDiaryEntryDto: CreateDiaryEntryDto = {
+                message: this.messageControl.value,
+                messageType: this.messageTypeControl.value,
+                reporter: this.reporterControl.value,
+                receiver: this.receiverControl.value,
+                messageTimestamp: this.messageTimestampControl.value,
+                author: this.authorControl.value,
+            };
+            this.operationsDiaryService.createDiaryEntry(createDiaryEntryDto, this.operation).subscribe();
 
-        this.messageControl.setValue('');
-        this.messageTypeControl.setValue('');
-        this.reporterControl.setValue('');
-        this.receiverControl.setValue('');
-        this.messageTimestampControl.setValue(this.createDateTimeNow());
-        // keep author
+            formGroupDirective.resetForm();
+            this.formGroup.reset();
+
+            this.messageTimestampControl.setValue(this.createDateTimeNow());
+            this.authorControl.setValue(createDiaryEntryDto.author);
+
+            setTimeout(() => {
+                elementToBeFocussed.focus();
+            }, 0);
+        } else {
+            console.debug('Validator error(s) prevent the diary entry creation');
+        }
     }
 
     cancel() {
@@ -109,4 +133,21 @@ export class CreateDiaryEntryCardComponent implements OnInit {
 
         return `${year}-${month}-${day}T${hours}:${minutes}:${seconds}`;
     }
+
+    private areAllFieldsValid() {
+        return (
+            this.messageControl.valid &&
+            this.messageTypeControl.valid &&
+            this.reporterControl.valid &&
+            (this.receiverControl.valid || !this.displayReceiverInput) &&
+            this.messageTimestampControl.valid &&
+            this.authorControl.valid
+        );
+    }
+
+    onMessageTypeSelectionChange($event: MatSelectChange<any>) {
+        this.displayReceiverInput = $event.value == MessageType.FORWARDING;
+    }
+
+    protected readonly MessageType = MessageType;
 }
