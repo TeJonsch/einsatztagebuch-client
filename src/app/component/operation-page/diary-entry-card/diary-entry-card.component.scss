@@ -2,6 +2,9 @@
     max-width: 800px;
 }
 
+.header-row {
+}
+
 .task {
     color: coral;
 }
@@ -15,4 +18,20 @@
 .timestamp {
     color: gray;
     font-size: 0.9rem;
+}
+
+.tools {
+    text-align: right;
+    line-height: 0.8rem;
+}
+
+.tool-icon {
+    border-radius: var(--mdc-outlined-card-container-shape, var(--mat-sys-corner-medium));
+    margin-left: 2px;
+    margin-right: 2px;
+    cursor: pointer;
+}
+
+.tool-icon:hover {
+    background-color: lightgray;
 }

@@ -1,11 +1,30 @@
 <mat-card
     class="entry-card"
-    appearance="outlined">
+    appearance="outlined"
+    (mouseover)="setDisplayTools(true)"
+    (mouseout)="setDisplayTools(false)">
     <mat-card-content>
-        <div cLass="row">
-            <span class="col timestamp">{{ diaryEntry.messageTimestamp }}</span>
-            <span class="col task">{{ diaryEntry.messageType }}</span>
-            <span class="col author">{{ diaryEntry.author }}</span>
+        <div cLass="row header-row">
+            <span class="col-4 timestamp">{{ diaryEntry.messageTimestamp }}</span>
+            <span class="col-3 author">{{ diaryEntry.author }}</span>
+            <span class="col-3 task">{{ diaryEntry.messageType }}</span>
+            @if (displayTools) {
+                <div class="col-2 tools">
+                    <mat-icon
+                        class="tool-icon"
+                        matTooltip="Korrektur erstellen"
+                        matTooltipPosition="above"
+                        (click)="openSubEntryDialog()">
+                        edit
+                    </mat-icon>
+                    <mat-icon
+                        class="tool-icon"
+                        matTooltip="Ergänzung erstellen"
+                        matTooltipPosition="above"
+                        >add
+                    </mat-icon>
+                </div>
+            }
         </div>
         <div class="row">
             <div class="col-4">
