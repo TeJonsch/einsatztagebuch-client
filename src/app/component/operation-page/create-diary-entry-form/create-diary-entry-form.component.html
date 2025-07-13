@@ -1,0 +1,99 @@
+<mat-card>
+    <mat-card-content>
+        <form
+            [formGroup]="formGroup"
+            #formDirective="ngForm"
+            (ngSubmit)="sendSubmitTriggered(formDirective)"
+            class="container px-0 text-center">
+            <div class="row">
+                <mat-form-field>
+                    <mat-label>Meldung</mat-label>
+                    <textarea
+                        matInput
+                        #messageTextarea
+                        name="message"
+                        [formControl]="messageControl"></textarea>
+                </mat-form-field>
+            </div>
+
+            <div class="row">
+                <mat-form-field class="col">
+                    <mat-label>Meldender</mat-label>
+                    <input
+                        matInput
+                        type="text"
+                        [formControl]="reporterControl"
+                        [matAutocomplete]="autocomplete_reporter" />
+                    <mat-autocomplete #autocomplete_reporter="matAutocomplete">
+                        @for (option of filteredReporterOptions | async; track option) {
+                            <mat-option [value]="option">{{ option }}</mat-option>
+                        }
+                    </mat-autocomplete>
+                </mat-form-field>
+
+                <mat-form-field class="col">
+                    <mat-label>Meldungstyp</mat-label>
+                    <mat-select
+                        [formControl]="messageTypeControl"
+                        (selectionChange)="onMessageTypeSelectionChange($event)">
+                        <mat-option [value]="MessageType.TASK">Aufgabe</mat-option>
+                        <mat-option [value]="MessageType.DOCUMENTATION">Dokumentation</mat-option>
+                        <mat-option [value]="MessageType.FORWARDING">Weiterleitung</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+
+            <div class="row">
+                <mat-form-field class="col-6">
+                    <mat-label>Datum und Zeit der Meldung</mat-label>
+                    <input
+                        matInput
+                        type="datetime-local"
+                        [formControl]="messageTimestampControl" />
+                </mat-form-field>
+
+                @if (displayReceiverInput) {
+                    <mat-form-field class="col-6">
+                        <mat-label>Empfänger</mat-label>
+                        <input
+                            matInput
+                            type="text"
+                            [formControl]="receiverControl"
+                            [matAutocomplete]="autocomplete_receiver" />
+                        <mat-autocomplete #autocomplete_receiver="matAutocomplete">
+                            @for (option of filteredReceiverOptions | async; track option) {
+                                <mat-option [value]="option">{{ option }}</mat-option>
+                            }
+                        </mat-autocomplete>
+                    </mat-form-field>
+                }
+            </div>
+
+            <div class="row">
+                <mat-form-field class="col">
+                    <mat-label>Verfasser</mat-label>
+                    <input
+                        matInput
+                        [formControl]="authorControl" />
+                </mat-form-field>
+
+                <div class="col">
+                    <div class="d-flex flex-row justify-content-between">
+                        <button
+                            mat-stroked-button
+                            class="button"
+                            (click)="resetForm(authorControl.value, formDirective)">
+                            Zurücksetzen
+                        </button>
+                        <button
+                            mat-flat-button
+                            type="submit"
+                            class="button">
+                            Hinzufügen
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </mat-card-content>
+</mat-card>

@@ -1,24 +1,24 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { filter, map, mergeMap, Observable } from 'rxjs';
+import { filter, mergeMap, Observable } from 'rxjs';
 import { OperationsDiaryService } from '../../../service/operations-diary.service';
 import { OperationDto } from '../../../model/operation.model';
 import { AsyncPipe } from '@angular/common';
-import { DiaryEntryCardComponent } from '../diary-entry-card/diary-entry-card.component';
 import { CreateDiaryEntryCardComponent } from '../create-diary-entry-card/create-diary-entry-card.component';
-import { MatDialog } from '@angular/material/dialog';
 import { DiaryEntryDto } from '../../../model/diary-entry.model';
+import { DiaryEntryWithDialogCardComponent } from '../diary-entry-with-dialog-card/diary-entry-with-dialog-card.component';
+import { OperationService } from '../../../service/operation.service';
 
 @Component({
     selector: 'app-diary-entry-overview',
-    imports: [AsyncPipe, DiaryEntryCardComponent, CreateDiaryEntryCardComponent],
+    imports: [AsyncPipe, CreateDiaryEntryCardComponent, DiaryEntryWithDialogCardComponent],
     templateUrl: './diary-entry-overview.component.html',
     styleUrl: './diary-entry-overview.component.scss',
 })
 export class DiaryEntryOverviewComponent implements OnInit {
-    private readonly dialog = inject(MatDialog);
     private readonly route = inject(ActivatedRoute);
     private readonly operationsDiaryService = inject(OperationsDiaryService);
+    private readonly operationService = inject(OperationService);
 
     public operation$!: Observable<OperationDto>;
     public sortedDiaryEntries$: Observable<DiaryEntryDto[]>;
@@ -31,23 +31,6 @@ export class DiaryEntryOverviewComponent implements OnInit {
             mergeMap((operationId) => this.operationsDiaryService.findOperation$(operationId)),
         );
 
-        this.sortedDiaryEntries$ = this.operation$.pipe(
-            map((operation) => {
-                return operation.diaryEntries;
-            }),
-            map((diaryEntries: DiaryEntryDto[]) => {
-                return diaryEntries.sort((a, b) => {
-                    return Date.parse(b.messageTimestamp) - Date.parse(a.messageTimestamp);
-                });
-            }),
-        );
-    }
-
-    openCreateDialog(operationDto: OperationDto) {
-        this.dialog.open(CreateDiaryEntryCardComponent, {
-            data: { operationDto: operationDto },
-            height: '400px',
-            width: '600px',
-        });
+        this.sortedDiaryEntries$ = this.operationService.getFilteredDiaryEntriesOf(this.operation$);
     }
 }

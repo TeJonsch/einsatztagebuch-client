@@ -12,9 +12,9 @@
 
                 @if (sortedDiaryEntries$ | async; as sortedDiaryEntries) {
                     @for (diaryEntry of sortedDiaryEntries; track diaryEntry.uuid) {
-                        <app-diary-entry-card
+                        <app-diary-entry-with-dialog-card
                             class="diary-entry"
-                            [diary-entry]="diaryEntry"></app-diary-entry-card>
+                            [diary-entry]="diaryEntry"></app-diary-entry-with-dialog-card>
                     }
                 }
             </div>
