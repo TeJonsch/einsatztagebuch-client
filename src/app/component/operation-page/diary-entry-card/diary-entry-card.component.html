@@ -5,7 +5,7 @@
     (mouseout)="setDisplayTools(false)">
     <mat-card-content>
         <div cLass="row header-row">
-            <span class="col-4 timestamp">{{ diaryEntry.messageTimestamp }}</span>
+            <span class="col-4 timestamp">{{ diaryEntry.messageTimestampReadable }}</span>
             <span class="col-3 author">{{ diaryEntry.author }}</span>
             <span class="col-3 task">{{ diaryEntry.messageType }}</span>
             @if (enableTools && displayTools) {

@@ -14,7 +14,8 @@ export class OperationService {
             }),
             map((diaryEntries: DiaryEntryDto[]) => {
                 return diaryEntries.sort((a, b) => {
-                    return Date.parse(b.messageTimestamp) - Date.parse(a.messageTimestamp);
+                    // sorts the array in descending order of the message timestamp
+                    return Date.parse(b.messageTimestampTechnical) - Date.parse(a.messageTimestampTechnical);
                 });
             }),
         );

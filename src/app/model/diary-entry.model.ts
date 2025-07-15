@@ -1,7 +1,7 @@
 export interface DiaryEntryDto {
     uuid: string;
-    creationTimestamp: string;
-    messageTimestamp: string;
+    messageTimestampTechnical: string;
+    messageTimestampReadable: string;
     message: string;
     messageType: string;
     reporter: string;
