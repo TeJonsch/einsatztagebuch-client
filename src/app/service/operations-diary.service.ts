@@ -11,6 +11,7 @@ import { CreateDiaryEntryDto } from '../model/create-diary-entry.model';
     providedIn: 'root',
 })
 export class OperationsDiaryService {
+    private static readonly API_PATH = 'api';
     private static readonly OPERATIONS_DIARY_PATH = 'operations-diary';
     private static readonly DIARY_ENTRIES_PATH = 'diary-entries';
 
@@ -55,7 +56,7 @@ export class OperationsDiaryService {
     }
 
     private getOperationsDiaryUrl() {
-        return `${environment.serverBaseUrl}/${OperationsDiaryService.OPERATIONS_DIARY_PATH}`;
+        return `${environment.serverBaseUrl}/${OperationsDiaryService.API_PATH}/${OperationsDiaryService.OPERATIONS_DIARY_PATH}`;
     }
 
     private getDiaryEntriesUrl(operationDto: OperationDto) {

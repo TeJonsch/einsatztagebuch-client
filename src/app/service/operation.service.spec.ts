@@ -33,7 +33,11 @@ describe('OperationService', () => {
 
         const operation: OperationDto = {
             diaryEntries: new Array<DiaryEntryDto>(entry04, entry08, entry03, entry09, entry10, entry06, entry05, entry07, entry11, entry02, entry12, entry01),
-        } as OperationDto;
+            uuid: 'irrelevant',
+            controlCenterId: 'irrelevant',
+            operationStartTimestamp: 'irrelevant',
+            alarmKeyword: 'irrelevant',
+        } satisfies OperationDto;
         let operation$ = new ReplaySubject<OperationDto>();
 
         const diaryEntriesInExpectedOrder = new Array<DiaryEntryDto>(
@@ -62,6 +66,15 @@ describe('OperationService', () => {
     });
 
     function createDiaryEntry(uuid: string, messageTimestamp: string): DiaryEntryDto {
-        return { uuid: uuid, messageTimestampTechnical: messageTimestamp } as DiaryEntryDto;
+        return {
+            uuid: uuid,
+            messageTimestampTechnical: messageTimestamp,
+            messageTimestampReadable: 'irrelevant',
+            message: 'irrelevant',
+            messageType: 'irrelevant',
+            reporter: 'irrelevant',
+            receiver: 'irrelevant',
+            author: 'irrelevant',
+        } satisfies DiaryEntryDto;
     }
 });
